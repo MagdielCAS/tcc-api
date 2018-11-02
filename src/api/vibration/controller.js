@@ -1,7 +1,7 @@
 import { success, notFound } from '../../services/response/';
 import { Vibration } from '.';
 
-export const create = ({ bodymen: { body } }, res, next) =>
+export const create = ({ body }, res, next) =>
   Vibration.create(body)
     .then(vibration => vibration.view(true))
     .then(success(res, 201))

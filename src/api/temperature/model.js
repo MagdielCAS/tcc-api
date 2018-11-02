@@ -9,7 +9,8 @@ const temperatureSchema = new Schema(
       type: String
     },
     sensor: {
-      type: String
+      type: Schema.Types.ObjectId,
+      ref: 'Sensor'
     }
   },
   {

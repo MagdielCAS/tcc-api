@@ -1,4 +1,6 @@
 import mqtt from 'mqtt';
+import Vibration from '../../api/vibration/model';
+import Temperature from '../../api/temperature/model';
 
 let client = mqtt.connect(
   process.env.MQTT_BROKER,
@@ -16,7 +18,26 @@ export default () => {
   });
 
   client.on('message', (topic, message) => {
-    console.log(topic);
-    console.log(message);
+    var split = topic.split('/');
+    if (split[1] === 'vibration') {
+      Vibration.create({ sensor: split[0], value: message, date: new Date() })
+        .then(vibration => vibration.view(true))
+        .then(() => {
+          console.log(`New vibration data added to ${split[0]}`);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    }
+    if (split[1] === 'temperature') {
+      Temperature.create({ sensor: split[0], value: message, date: new Date() })
+        .then(temperature => temperature.view(true))
+        .then(() => {
+          console.log(`New temperature data added to ${split[0]}`);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    }
   });
 };

@@ -1,25 +1,31 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose';
 
-const sensorSchema = new Schema({
-  label: {
-    type: String
+const sensorSchema = new Schema(
+  {
+    label: {
+      type: String
+    },
+    motor: {
+      type: Schema.Types.ObjectId,
+      ref: 'Motor'
+    },
+    type: {
+      type: String
+    }
   },
-  motor: {
-    type: String
-  },
-  type: {
-    type: String
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => {
+        delete ret._id;
+      }
+    }
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+);
 
 sensorSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
@@ -28,16 +34,18 @@ sensorSchema.methods = {
       type: this.type,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
-    }
+    };
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
+    return full
+      ? {
+          ...view
+          // add properties for a full view
+        }
+      : view;
   }
-}
+};
 
-const model = mongoose.model('Sensor', sensorSchema)
+const model = mongoose.model('Sensor', sensorSchema);
 
-export const schema = model.schema
-export default model
+export const schema = model.schema;
+export default model;

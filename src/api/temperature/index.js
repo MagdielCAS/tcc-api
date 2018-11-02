@@ -18,7 +18,7 @@ const { value, date, sensor } = schema.tree;
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Temperature not found.
  */
-router.post('/', body({ value, date, sensor }), create);
+router.post('/', create);
 
 /**
  * @api {get} /temperatures Retrieve temperatures
