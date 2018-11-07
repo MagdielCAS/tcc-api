@@ -1,15 +1,13 @@
-import { Router } from 'express'
-import temperature from './temperature'
-import vibration from './vibration'
-import sensor from './sensor'
-import motor from './motor'
+import { Router } from 'express';
+import sensor from './sensor';
+import motor from './motor';
+import reading from './reading'
 
-const router = new Router()
+const router = new Router();
 
-router.use('/temperatures', temperature)
-router.use('/vibrations', vibration)
-router.use('/sensors', sensor)
-router.use('/motors', motor)
+router.use('/sensors', sensor);
+router.use('/motors', motor);
+router.use('/readings', reading)
 
 /**
  * @apiDefine master Master access only
@@ -35,4 +33,4 @@ router.use('/motors', motor)
  * @apiParam {String[]} [fields] Fields to be returned.
  */
 
-export default router
+export default router;

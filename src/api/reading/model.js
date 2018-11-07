@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const vibrationSchema = new Schema(
+const readingSchema = new Schema(
   {
     value: {
       type: String
@@ -24,7 +24,7 @@ const vibrationSchema = new Schema(
   }
 );
 
-vibrationSchema.methods = {
+readingSchema.methods = {
   view(full) {
     const view = {
       // simple view
@@ -45,7 +45,7 @@ vibrationSchema.methods = {
   }
 };
 
-const model = mongoose.model('Vibration', vibrationSchema);
+const model = mongoose.model('Reading', readingSchema);
 
 export const schema = model.schema;
 export default model;
