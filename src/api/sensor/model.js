@@ -3,14 +3,17 @@ import mongoose, { Schema } from 'mongoose';
 const sensorSchema = new Schema(
   {
     label: {
-      type: String
+      type: String,
+      required: true
     },
     motor: {
       type: Schema.Types.ObjectId,
-      ref: 'Motor'
+      ref: 'Motor',
+      required: true
     },
     type: {
-      type: String
+      type: String,
+      required: true
     }
   },
   {

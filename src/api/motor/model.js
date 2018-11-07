@@ -1,25 +1,31 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose';
 
-const motorSchema = new Schema({
-  label: {
-    type: String
+const motorSchema = new Schema(
+  {
+    label: {
+      type: String,
+      required: true
+    },
+    power: {
+      type: String
+    },
+    location: {
+      type: String
+    }
   },
-  power: {
-    type: String
-  },
-  location: {
-    type: String
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => {
+        delete ret._id;
+      }
+    }
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+);
 
 motorSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
@@ -28,16 +34,18 @@ motorSchema.methods = {
       location: this.location,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
-    }
+    };
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
+    return full
+      ? {
+          ...view
+          // add properties for a full view
+        }
+      : view;
   }
-}
+};
 
-const model = mongoose.model('Motor', motorSchema)
+const model = mongoose.model('Motor', motorSchema);
 
-export const schema = model.schema
-export default model
+export const schema = model.schema;
+export default model;

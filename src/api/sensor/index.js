@@ -1,12 +1,12 @@
-import { Router } from 'express'
-import { middleware as query } from 'querymen'
-import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
-import { schema } from './model'
-export Sensor, { schema } from './model'
+import { Router } from 'express';
+import { middleware as query } from 'querymen';
+import { middleware as body } from 'bodymen';
+import { create, index, show, update, destroy } from './controller';
+import { schema } from './model';
+export Sensor, { schema } from './model';
 
-const router = new Router()
-const { label, motor, type } = schema.tree
+const router = new Router();
+const { label, motor, type } = schema.tree;
 
 /**
  * @api {post} /sensors Create sensor
@@ -19,9 +19,7 @@ const { label, motor, type } = schema.tree
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Sensor not found.
  */
-router.post('/',
-  body({ label, motor, type }),
-  create)
+router.post('/', body({ label, motor, type }), create);
 
 /**
  * @api {get} /sensors Retrieve sensors
@@ -32,9 +30,7 @@ router.post('/',
  * @apiSuccess {Object[]} rows List of sensors.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/',
-  query(),
-  index)
+router.get('/', index);
 
 /**
  * @api {get} /sensors/:id Retrieve sensor
@@ -44,8 +40,7 @@ router.get('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Sensor not found.
  */
-router.get('/:id',
-  show)
+router.get('/:id', show);
 
 /**
  * @api {put} /sensors/:id Update sensor
@@ -58,9 +53,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Sensor not found.
  */
-router.put('/:id',
-  body({ label, motor, type }),
-  update)
+router.put('/:id', body({ label, motor, type }), update);
 
 /**
  * @api {delete} /sensors/:id Delete sensor
@@ -69,7 +62,6 @@ router.put('/:id',
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Sensor not found.
  */
-router.delete('/:id',
-  destroy)
+router.delete('/:id', destroy);
 
-export default router
+export default router;

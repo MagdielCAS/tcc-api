@@ -3,14 +3,16 @@ import mongoose, { Schema } from 'mongoose';
 const readingSchema = new Schema(
   {
     value: {
-      type: String
+      type: String,
+      required: true
     },
     date: {
       type: String
     },
     sensor: {
       type: Schema.Types.ObjectId,
-      ref: 'Sensor'
+      ref: 'Sensor',
+      required: true
     }
   },
   {
