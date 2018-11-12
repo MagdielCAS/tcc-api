@@ -18,13 +18,15 @@ export default () => {
 
   client.on('message', (topic, message) => {
     var split = topic.split('/');
-    Reading.create({ sensor: split[0], value: message, date: new Date() })
-      .then(vibration => vibration.view(true))
-      .then(() => {
-        console.log(`New ${split[1]} data added to ${split[0]}`);
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
+    if (split[1] === 'vibration' || split[1] === 'temperature') {
+      Reading.create({ sensor: split[0], value: message, date: new Date() })
+        .then(vibration => vibration.view(true))
+        .then(() => {
+          console.log(`New ${split[1]} data added to ${split[0]}`);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    }
   });
 };

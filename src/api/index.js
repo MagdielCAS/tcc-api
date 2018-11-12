@@ -2,12 +2,14 @@ import { Router } from 'express';
 import sensor from './sensor';
 import motor from './motor';
 import reading from './reading'
+import lscalculation from './lscalculation'
 
 const router = new Router();
 
 router.use('/sensors', sensor);
 router.use('/motors', motor);
 router.use('/readings', reading)
+router.use('/lscalculations', lscalculation)
 
 /**
  * @apiDefine master Master access only
