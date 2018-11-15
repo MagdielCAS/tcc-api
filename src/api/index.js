@@ -3,6 +3,9 @@ import sensor from './sensor';
 import motor from './motor';
 import reading from './reading'
 import lscalculation from './lscalculation'
+import rnnModel from './RNNModel'
+import rnncalculation from './rnncalculation'
+import sensorConfiguration from './SensorConfiguration'
 
 const router = new Router();
 
@@ -10,6 +13,9 @@ router.use('/sensors', sensor);
 router.use('/motors', motor);
 router.use('/readings', reading)
 router.use('/lscalculations', lscalculation)
+router.use('/RNNModels', rnnModel)
+router.use('/rnncalculations', rnncalculation)
+router.use('/SensorConfigurations', sensorConfiguration)
 
 /**
  * @apiDefine master Master access only
