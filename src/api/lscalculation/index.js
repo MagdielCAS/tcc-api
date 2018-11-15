@@ -4,14 +4,13 @@ import { calculate } from './controller';
 const router = new Router();
 
 /**
- * @api {get} /lscalculations/:id Retrieve lscalculation
- * @apiName RetrieveLscalculation
+ * @api {post} /lscalculations Create lscalculation
+ * @apiName CreateLscalculation
  * @apiGroup Lscalculation
- * @apiSuccess {Object} lscalculation Lscalculation's data.
+ * @apiSuccess {Object} lscalculation Rnncalculation's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Lscalculation not found.
  */
-// router.get('/', calculate);
 router.post('/', calculate);
 
 export default router;
