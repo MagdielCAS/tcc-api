@@ -19,9 +19,8 @@ setImmediate(() => {
       port,
       env
     );
+    mqtt();
   });
 });
-
-mqtt();
 
 export default app;

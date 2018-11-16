@@ -6,6 +6,7 @@ import lscalculation from './lscalculation'
 import rnnModel from './RNNModel'
 import rnncalculation from './rnncalculation'
 import sensorConfiguration from './SensorConfiguration'
+import lsarxcalculation from './lsarxcalculation'
 
 const router = new Router();
 
@@ -16,6 +17,7 @@ router.use('/lscalculations', lscalculation)
 router.use('/RNNModels', rnnModel)
 router.use('/rnncalculations', rnncalculation)
 router.use('/SensorConfigurations', sensorConfiguration)
+router.use('/lsarxcalculations', lsarxcalculation)
 
 /**
  * @apiDefine master Master access only
