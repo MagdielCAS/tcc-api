@@ -2,6 +2,7 @@ import mqtt from 'mqtt';
 
 export const create = ({ body }, res, next) => {
   try {
+    var cont = 0;
     let client = mqtt.connect(
       process.env.MQTT_BROKER,
       {
@@ -10,22 +11,25 @@ export const create = ({ body }, res, next) => {
         password: process.env.MQTT_PASSWORD
       }
     );
-    var topic = `${body.sensor}/config`;
     client.on('connect', () => {
-      client.subscribe(topic, function(err) {
+      client.subscribe(`${body.sensor}/config/#`, function(err) {
         if (!err) {
-          client.publish(
-            `${body.sensor}/config`,
-            `${body.period}/${body.time}`
-          );
+          client.publish(`${body.sensor}/config/period`, `${body.period}`);
+          client.publish(`${body.sensor}/config/size`, `${body.time}`);
         }
       });
     });
     client.on('message', (t, message) => {
-      if (topic === t) {
-        console.log(message.toString());
+      if (
+        `${body.sensor}/config/period` === t ||
+        `${body.sensor}/config/size` === t
+      ) {
+        cont = cont + 1;
+      }
+      if (cont === 2) {
+        cont = 0;
         client.end();
-        res.status(200).send(body);
+        res.status(201).send(body);
       }
     });
   } catch (error) {
