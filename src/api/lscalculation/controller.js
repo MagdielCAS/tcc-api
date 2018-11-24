@@ -9,8 +9,16 @@ export const calculate = ({ body }, res) => {
     py.stdout.on('data', function(data) {
       dataString += data.toString();
     });
+
+    py.stderr.on('data', data => {
+      console.log(`stderr: ${data}`);
+    });
+
+    py.on('close', code => {
+      console.log(`compute_ls exited with code ${code}`);
+    });
+
     py.stdout.on('end', function() {
-      console.log(dataString);
       res.status(201).send({ result: JSON.parse(dataString) });
     });
 

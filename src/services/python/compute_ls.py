@@ -23,8 +23,7 @@ def main():
 
     y_ap = np.dot(Atest, th)
     result = np.column_stack((Pl, y_ap))
-    print(result.tolist())
-    # print(P[-1]+((np.arange(1, steps).T)*25)))
+    print(json.dumps(result.tolist()))
 
 
 # start process

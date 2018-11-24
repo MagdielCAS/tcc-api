@@ -39,13 +39,13 @@ def main():
     p1 = np.dot(phi.T, phi)
     p2 = np.linalg.solve(p1, phi.T)
     th = np.dot(p2, Y.T)
-    
+
     y_ap = np.zeros(Pl.shape)
     y_ap[np.arange(m+1)] = Y[np.arange(m+1)]
     for i in np.arange(m, Pl.size):
         y_ap[i] = -y_ap[i-1]*th[0]-y_ap[i-2]*th[1]-y_ap[i-3]*th[2] + \
             +Pl[i]*th[3]+Pl[i-1]*th[4]+Pl[i-2]*th[5]+Pl[i-3]*th[6]
-    
+
     result = np.column_stack((Pl, y_ap))
     print(result.tolist())
 
